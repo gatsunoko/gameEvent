@@ -21,6 +21,10 @@
   .field
     = f.label :text
     = f.text_area :text, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field.my-2
+  - if controller.action_name == 'new' || controller.action_name == 'create'
+    %label{for: 'event_edit_others'} 他者による編集を許可
+    = check_box_tag 'event[edit_others]', true, false, {}
   - if controller.action_name == 'edit' || controller.action_name == 'update'
     = f.hidden_field :event_id, value: @event_detail.event.id
   .actions

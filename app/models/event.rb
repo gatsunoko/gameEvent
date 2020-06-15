@@ -1,3 +1,3 @@
 class Event < ApplicationRecord
-  has_many :event_details
+  has_many :event_details, dependent: :destroy
 end

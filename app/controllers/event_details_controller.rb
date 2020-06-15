@@ -1,36 +1,35 @@
 class EventDetailsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_event_detail, only: [:show, :edit, :update, :destroy]
+  before_action :can_edit, only: [:edit, :update]
 
-  # GET /event_details
-  # GET /event_details.json
   def index
     @event_details = EventDetail.where(latest: true)
                                 .where('date > ?', Time.now)
                                 .order(date: :asc)
   end
 
-  # GET /event_details/1
-  # GET /event_details/1.json
   def show
   end
 
-  # GET /event_details/new
   def new
     @event_detail = EventDetail.new
   end
 
-  # GET /event_details/1/edit
   def edit
   end
 
-  # POST /event_details
-  # POST /event_details.json
   def create
     @event_detail = EventDetail.new(event_detail_params)
     @event_detail.user_id = current_user.id
     @event_detail.latest = true
-    event = Event.create
+
+    if params.dig(:event, :edit_others) == 'true'
+      edit_others = true
+    else
+      edit_others = false
+    end
+    event = Event.create(edit_others: edit_others, user_id: current_user.id)
     @event_detail.event_id = event.id
 
     respond_to do |format|
@@ -38,14 +37,13 @@ class EventDetailsController < ApplicationController
         format.html { redirect_to @event_detail, notice: 'Event detail was successfully created.' }
         format.json { render :show, status: :created, location: @event_detail }
       else
+        event.destroy
         format.html { render :new }
         format.json { render json: @event_detail.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /event_details/1
-  # PATCH/PUT /event_details/1.json
   def update
     @new_event_detail = EventDetail.new(event_detail_params)
     @new_event_detail.user_id = current_user.id
@@ -87,12 +85,17 @@ class EventDetailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_event_detail
       @event_detail = EventDetail.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    def can_edit
+      if !@event_detail.event.edit_others &&
+          @event_detail.event.user_id != current_user.id
+        redirect_to root_path and return
+      end
+    end
+
     def event_detail_params
       params.require(:event_detail).permit(:game_id, :owner, :title, :text, :date, :latest, :boolean, :event_id)
     end

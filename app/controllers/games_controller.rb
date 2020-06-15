@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :im_admin
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   # GET /games
@@ -71,5 +72,11 @@ class GamesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def game_params
       params.require(:game).permit(:title)
+    end
+
+    def im_admin
+      if !current_user.admin
+        redirect_to root_path and return
+      end
     end
 end
