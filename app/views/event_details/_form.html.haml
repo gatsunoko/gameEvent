@@ -1,0 +1,27 @@
+= form_for @event_detail do |f|
+  - if @event_detail.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event_detail.errors.count, "error")} prohibited this event_detail from being saved:"
+      %ul
+        - @event_detail.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label 'ゲーム'
+    = f.collection_select :game_id, Game.all, :id, :title, {}, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label :owner
+    = f.text_field :owner, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label :title
+    = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label :date
+    = f.datetime_local_field :date, class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
+  .field
+    = f.label :text
+    = f.text_area :text, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  - if controller.action_name == 'edit' || controller.action_name == 'update'
+    = f.hidden_field :event_id, value: @event_detail.event.id
+  .actions
+    = f.submit 'Save'

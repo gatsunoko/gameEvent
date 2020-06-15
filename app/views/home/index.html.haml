@@ -1,0 +1,9 @@
+%main.home
+  %section.events
+    - Game.all.each do |game|
+      .event_wrapper
+        = link_to game_event_details_path(id: game.id) do
+          .event_body
+            %h2.title
+              = game.title
+  = link_to '新規登録', new_event_detail_path, class: 'btn btn-primary'

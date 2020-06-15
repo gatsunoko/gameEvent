@@ -1,0 +1,48 @@
+// Place all the styles related to the EventDetails controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.event_details_index {
+  .events {
+    .title {
+      padding: 15px;
+      border-bottom: 2px solid gray;
+      p {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0px;
+      }
+    }
+    .body {
+      padding: 0;
+      .event {
+        list-style: none;
+        padding: 15px;
+        li {
+          padding: 0;
+        }
+        p {
+          font-size: 18px;
+          margin: 0px;
+        }
+        p.owner {
+          font-weight: bold;
+        }
+        @media screen and (max-width: 728px) {
+          p {
+            margin: 0 0 15px 0;
+          }
+        }
+      }
+      .event:nth-child(odd) {
+        background-color: #e9ecef;
+      }
+    }
+  }
+}
+
+.event_details_show {
+  p {
+    font-size: 18px;
+  }
+}

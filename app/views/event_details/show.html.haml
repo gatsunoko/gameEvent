@@ -1,0 +1,16 @@
+.event_details_show
+  %h1
+    = @event_detail.game.title
+  %p
+    %b 主催者:
+    = @event_detail.owner
+  %h2
+    = @event_detail.title
+  %p
+    %b 開催日
+    = @event_detail.date.strftime('%Y/%m/%d/ %H:%M')
+  .text
+    = simple_format(@event_detail.text)
+
+  - if user_signed_in?
+    = link_to 'Edit', edit_event_detail_path(@event_detail)

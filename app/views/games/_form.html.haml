@@ -1,0 +1,13 @@
+= form_for @game do |f|
+  - if @game.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
+      %ul
+        - @game.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :title
+    = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'

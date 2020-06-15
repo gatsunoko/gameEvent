@@ -1,0 +1,34 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+:root {
+  --color_1: #e5ccb6;
+}
+.home {
+  .events {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    .event_wrapper {
+      padding: 5px;
+      box-sizing: border-box;
+      width: calc(100% / 3);
+      height: 185px;
+      .event_body {
+        background-color: #e5ccb6;
+        height: 100%;
+        .title {
+          text-align: center;
+          font-size: 26px;
+          font-weight: bold;
+          color: black;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}

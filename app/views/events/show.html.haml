@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Game:
+  = @event.game.title
+%p
+  %strong Owner:
+  = @event.owner
+%p
+  %strong Title:
+  = @event.title
+%p
+  %strong Text:
+  = @event.text
+%p
+  %strong Date:
+  = @event.date
+%p
+  %strong Latest:
+  = @event.latest
+%p
+  %strong User:
+  = @event.user_id
+= link_to 'Edit', edit_event_path(@event)
+|
+= link_to 'Back', events_path
