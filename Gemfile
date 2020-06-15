@@ -37,6 +37,7 @@ gem 'aws-sdk-s3', '~> 1.66'
 gem 'image_processing', '~> 1.11'
 gem 'whenever', '~> 1.0'
 gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
+gem 'nested_fields', git: 'https://github.com/kmdtmyk/nested_fields', branch: 'master'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

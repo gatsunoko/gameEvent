@@ -2,7 +2,9 @@ class EventDetail < ApplicationRecord
   belongs_to :event
   belongs_to :game
   belongs_to :user
-
+  has_many :tags, dependent: :destroy
+  accepts_nested_attributes_for :tags, allow_destroy: true
+  
   validates :owner, presence: true
   validates :title, presence: true
   validates :date, presence: true

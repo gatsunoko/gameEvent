@@ -5,6 +5,18 @@
   --color_1: #e5ccb6;
 }
 .home {
+  header {
+    height: 250px;
+    background-color: pink;
+    width: 100%;
+    position: relative;
+    .search {
+      width: 300px;
+      position: absolute;
+      top: 50%;
+      left: 40%;
+    }
+  }
   .events {
     display: flex;
     justify-content: center;

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :event_details do
     collection do
       get :game
+      get :tag_search
     end
   end
   resources :games

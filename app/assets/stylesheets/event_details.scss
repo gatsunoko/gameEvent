@@ -50,4 +50,20 @@
   a {
     color: blue;
   }
+  .tags {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    .tag {
+      white-space: nowrap;
+      color: black;
+      padding: 2px 7px;
+      margin: 5px 15px 5px 0;
+      background-color: white;
+      border-radius: 15px;
+      border: 1px solid #fff;
+    }
+  }
 }

@@ -18,6 +18,14 @@
   .field
     = f.label :date
     = f.datetime_local_field :date, class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
+  #tags.my-2
+    %p
+      タグ
+    = f.nested_fields :tags do |tag|
+      .field.row.my-1.w-100.mx-0
+        = tag.text_field :title, class: 'form-control col-xs-10 col-sm-10 col-md-10 col-lg-8'
+        = tag.remove_nested_fields_button '削除', class: 'btn btn-danger co-xs-3 col-sm-2'
+    = f.add_nested_fields_button :tags, '追加', class: 'btn btn-primary'
   .field
     = f.label :text
     = f.text_area :text, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
@@ -28,4 +36,4 @@
   - if controller.action_name == 'edit' || controller.action_name == 'update'
     = f.hidden_field :event_id, value: @event_detail.event.id
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-primary'

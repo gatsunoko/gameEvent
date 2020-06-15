@@ -5,7 +5,7 @@ class EventDetailsController < ApplicationController
 
   def index
     @event_details = EventDetail.where(latest: true)
-                                .where('date > ?', Time.now)
+                                .where('date > ?', Date.today - 1)
                                 .order(date: :asc)
   end
 
@@ -78,8 +78,38 @@ class EventDetailsController < ApplicationController
     @game = Game.find params[:id]
     @event_details = EventDetail.where(latest: true)
                                 .where(game_id: params[:id])
-                                .where('date > ?', Time.now)
+                                .where('date > ?', Date.today - 1)
                                 .order(date: :asc)
+
+    render 'index'
+  end
+
+  def tag_search
+    #パラメーターが空だったらトップへ
+    redirect_to root_path and return if params[:keyword].blank?
+    #検索
+    sp = params[:keyword].gsub("　"," ")#全角スペースを半角スペースに変換
+    sp.chop! if sp[sp.length-1] == " "#最後の文字がスペースだったら削除
+    sp = sp.gsub(" ","%,%")#半角スペースをカンマに変換(プレスホルダーの第二引数以降に使用する変数spに代入)
+    sp = '%'+sp+'%'
+    sp = sp.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
+
+    eventTags = Array.new
+
+    sp.each.with_index do |keyword, i|
+      if i > 0
+        eventTags = eventTags & Tag.where('title like ?', keyword).pluck(:event_detail_id)
+      else
+        eventTags.push(*Tag.where('title like ?', keyword).pluck(:event_detail_id))
+      end
+    end
+
+    @event_details = EventDetail.where(latest: true)
+                    .where(id: eventTags)
+                    .order(date: :asc)
+                    .distinct
+    #検索結果に表示にするタグ一覧ほインスタンス変数に保存
+    @searchTags = params[:keyword].gsub("　"," ")
 
     render 'index'
   end
@@ -97,6 +127,15 @@ class EventDetailsController < ApplicationController
     end
 
     def event_detail_params
-      params.require(:event_detail).permit(:game_id, :owner, :title, :text, :date, :latest, :boolean, :event_id)
+      params.require(:event_detail).permit(:game_id,
+                                           :owner,
+                                           :title,
+                                           :text,
+                                           :date,
+                                           :latest,
+                                           :boolean,
+                                           :event_id,
+                                           tags_attributes: [:title, :_destroy],)
     end
+
 end

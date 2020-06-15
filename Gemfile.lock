@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/kmdtmyk/nested_fields
+  revision: dbb7241fa319136282d490c346034dfafb06955a
+  branch: master
+  specs:
+    nested_fields (0.1.0)
+      rails (>= 5.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -307,6 +315,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
+  nested_fields!
   omniauth (~> 1.9)
   omniauth-google-oauth2 (~> 0.8.0)
   puma (~> 4.1)
