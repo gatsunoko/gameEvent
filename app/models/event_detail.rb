@@ -9,6 +9,10 @@ class EventDetail < ApplicationRecord
   validates :title, presence: true
   validates :date, presence: true
   validate  :date_not_before_today
+
+  scope :game_search, ->(name) {
+    where(game_id: name.to_i) if name.present?
+  }
   
   def date_not_before_today
     errors.add(:date, "は今日以降のものを選択してください") if date.nil? || date < Date.today

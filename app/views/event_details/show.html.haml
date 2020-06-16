@@ -11,7 +11,7 @@
     = @event_detail.date.strftime('%Y/%m/%d/ %H:%M')
   .tags
     - @event_detail.tags.each do |tag|
-      = link_to tag.title, tag_search_event_details_path(keyword: tag.title), class: 'tag' 
+      = link_to tag.title, tag_search_event_details_path(keyword: tag.title, game_id: @event_detail.game.id), class: 'tag' 
   .text
     = text_url_to_link(h(simple_format(@event_detail.text))).html_safe
   - if user_signed_in?

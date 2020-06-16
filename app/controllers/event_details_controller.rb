@@ -104,7 +104,9 @@ class EventDetailsController < ApplicationController
       end
     end
 
+    @game = Game.find params[:game_id] if params[:game_id].present?
     @event_details = EventDetail.where(latest: true)
+                    .game_search(params[:game_id].to_s)#scope
                     .where(id: eventTags)
                     .order(date: :asc)
                     .distinct
