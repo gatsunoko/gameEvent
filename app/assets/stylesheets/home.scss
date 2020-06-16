@@ -18,17 +18,11 @@
     }
   }
   .events {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     .event_wrapper {
       padding: 5px;
-      box-sizing: border-box;
-      width: calc(100% / 3);
       height: 185px;
       .event_body {
         background-color: #e5ccb6;

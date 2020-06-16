@@ -5,9 +5,10 @@
       %ul
         - @game.errors.full_messages.each do |message|
           %li= message
-
   .field
     = f.label :title
     = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.file_field :image, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .actions
     = f.submit 'Save', class: 'btn btn-primary'

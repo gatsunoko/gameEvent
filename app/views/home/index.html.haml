@@ -4,11 +4,14 @@
       = form_with(url: game_event_details_path, local: true, method: :get, class: 'form-inline my-2 my-lg-0') do |f|
         = f.collection_select :id, Game.all, :id, :title, {}, class: 'form-control col-xs-12 col-sm-8 col-md-6 col-lg-6'
         %button.btn.btn-success.my-2.my-sm-0{:type => "submit"} 検索
-  %section.events
+  %section.events.row
     - Game.all.each do |game|
-      .event_wrapper
+      .event_wrapper.col-12.col-sm-6.col-md-4
         = link_to game_event_details_path(id: game.id) do
           .event_body
             %h2.title
               = game.title
+            .image.text-center
+              - if game.image.present?
+                = image_tag game.image.variant(resize_to_limit: [150, 100])
   = link_to '新規登録', new_event_detail_path, class: 'btn btn-primary'

@@ -3,7 +3,9 @@
 %p
   %b Title:
   = @game.title
-
+.image.text-center
+  - if @game.image.present?
+    = image_tag @game.image.variant(resize_to_limit: [500, 500])
 = link_to 'Edit', edit_game_path(@game)
 \|
 = link_to 'Back', games_path
