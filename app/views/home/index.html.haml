@@ -1,10 +1,27 @@
 %main.home
   %header
-    .search
+    .events
+      .title.row
+        %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 ゲーム
+        %p.col-12.col-sm-12.col-md-8.order-3.order-md-2 タイトル
+        %p.col-6.col-sm-6.col-md-2.order-2.order-md-3 開催日
+      %ul.body
+        - @event_details.each do |event_detail|
+          %li.event
+            = link_to event_detail, class: 'row' do
+              %p.game.col-6.col-sm-6.col-md-2.order-1.order-md-1
+                = event_detail.game.title
+              %p.col-12.col-sm-12.col-md-8.order-3.order-md-2
+                = event_detail.title
+              %p.col-6.col-sm-6.col-md-2.order-2.order-md-3
+                = event_detail.date.strftime('%m/%d/ %H:%M').to_s
+    .more.text-center
+      = link_to 'もっと見る', event_details_path, class: 'btn btn-primary'
+  %section.games.row
+    .search.col-12.mx-2.text-center
       = form_with(url: game_event_details_path, local: true, method: :get, class: 'form-inline my-2 my-lg-0') do |f|
         = f.collection_select :id, Game.all, :id, :title, {}, class: 'form-control col-xs-12 col-sm-8 col-md-6 col-lg-6'
         %button.btn.btn-success.my-2.my-sm-0{:type => "submit"} 検索
-  %section.events.row
     - Game.all.each do |game|
       .event_wrapper.col-12.col-sm-6.col-md-4
         = link_to game_event_details_path(id: game.id) do
