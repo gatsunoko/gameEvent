@@ -18,6 +18,12 @@
   .field
     = f.label :date
     = f.datetime_local_field :date, class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
+  - if controller.action_name == 'edit' || controller.action_name == 'update'
+    .image.text-left.w-100
+      - if @event_detail.image.present?
+        = image_tag @event_detail.image.variant(resize_to_limit: [1280, 720])
+  .field
+    = f.file_field :image, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   #tags.my-2
     %p
       タグ

@@ -7,10 +7,12 @@
     .title {
       padding: 15px;
       border-bottom: 2px solid gray;
+      background-color: black;
       p {
         font-size: 18px;
         font-weight: bold;
         margin: 0px;
+        color: white;
       }
     }
     .body {
@@ -44,6 +46,11 @@
 }
 
 .event_details_show {
+  .image {
+    img {
+      max-width: 100%;
+    }
+  }
   p {
     font-size: 18px;
   }

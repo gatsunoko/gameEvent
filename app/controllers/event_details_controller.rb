@@ -45,20 +45,30 @@ class EventDetailsController < ApplicationController
   end
 
   def update
-    @new_event_detail = EventDetail.new(event_detail_params)
-    @new_event_detail.user_id = current_user.id
-    @new_event_detail.latest = true
-    @new_event_detail.event_id = @event_detail.event.id
+    # @event_detail = EventDetail.new(event_detail_params)
+    # @event_detail.user_id = current_user.id
+    # @event_detail.latest = true
+    # @event_detail.event_id = @event_detail.event.id
+
+    # respond_to do |format|
+    #   if @event_detail.save
+    #     if @event_detail.update(latest: false)
+    #       format.html { redirect_to @event_detail }
+    #       format.json { render :show, status: :ok, location: @event_detail }
+    #     else
+    #       format.html { render :edit }
+    #       format.json { render json: @event_detail.errors, status: :unprocessable_entity }
+    #     end
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @event_detail.errors, status: :unprocessable_entity }
+    #   end
+    # end
 
     respond_to do |format|
-      if @new_event_detail.save
-        if @event_detail.update(latest: false)
-          format.html { redirect_to @new_event_detail }
-          format.json { render :show, status: :ok, location: @new_event_detail }
-        else
-          format.html { render :edit }
-          format.json { render json: @new_event_detail.errors, status: :unprocessable_entity }
-        end
+      if @event_detail.update(event_detail_params)
+        format.html { redirect_to @event_detail }
+        format.json { render :show, status: :ok, location: @event_detail }
       else
         format.html { render :edit }
         format.json { render json: @event_detail.errors, status: :unprocessable_entity }
@@ -129,15 +139,20 @@ class EventDetailsController < ApplicationController
     end
 
     def event_detail_params
-      params.require(:event_detail).permit(:game_id,
-                                           :owner,
-                                           :title,
-                                           :text,
-                                           :date,
-                                           :latest,
-                                           :boolean,
-                                           :event_id,
-                                           tags_attributes: [:title, :_destroy],)
+      params.require(:event_detail).permit(
+        :game_id,
+        :owner,
+        :title,
+        :text,
+        :date,
+        :latest,
+        :boolean,
+        :event_id,
+        :image,
+        tags_attributes: [
+          :title,
+          :id,
+          :_destroy],
+      )
     end
-
 end

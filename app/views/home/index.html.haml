@@ -18,9 +18,10 @@
     .more.text-center
       = link_to 'もっと見る', event_details_path, class: 'btn btn-primary'
   %section.games.row
-    .search.col-12.mx-2.text-center
-      = form_with(url: game_event_details_path, local: true, method: :get, class: 'form-inline my-2 my-lg-0') do |f|
-        = f.collection_select :id, Game.all, :id, :title, {}, class: 'form-control col-xs-12 col-sm-8 col-md-6 col-lg-6'
+    .search.col-12.mx-2.text-right
+      = form_with(url: game_event_details_path, local: true, method: :get, class: 'row my-2 w-100 text-right') do |f|
+        = f.collection_select :id, Game.all, :id, :title, {}, class: 'form-control col-xs-12 col-sm-8 col-md-3 col-lg-3'
+        = f.text_field :keyword, class: 'form-control col-xs-12 col-sm-8 col-md-6 col-lg-6'
         %button.btn.btn-success.my-2.my-sm-0{:type => "submit"} 検索
     - Game.all.each do |game|
       .event_wrapper.col-12.col-sm-6.col-md-4

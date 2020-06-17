@@ -10,6 +10,8 @@ class EventDetail < ApplicationRecord
   validates :date, presence: true
   validate  :date_not_before_today
 
+  has_one_attached :image
+
   scope :game_search, ->(name) {
     where(game_id: name.to_i) if name.present?
   }

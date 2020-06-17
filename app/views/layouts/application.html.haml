@@ -26,10 +26,6 @@
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
         %ul.navbar-nav
-          %li.nav-item
-            = form_with(url: game_event_details_path, local: true, method: :get, class: 'form-inline') do |f|
-              = f.collection_select :id, Game.all, :id, :title, {}, class: 'form-control'
-              %button.btn.btn-success.my-2.my-sm-0{:type => "submit"} 検索
           -if user_signed_in?
             %li.nav-item
               = link_to ' ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
