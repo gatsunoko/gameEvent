@@ -90,8 +90,6 @@ class EventDetailsController < ApplicationController
                                 .where(game_id: params[:id])
                                 .where('date > ?', Date.today - 1)
                                 .order(date: :asc)
-
-    render 'index'
   end
 
   def tag_search
@@ -123,7 +121,7 @@ class EventDetailsController < ApplicationController
     #検索結果に表示にするタグ一覧ほインスタンス変数に保存
     @searchTags = params[:keyword].gsub("　"," ")
 
-    render 'index'
+    render 'game'
   end
 
   private

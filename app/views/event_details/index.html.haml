@@ -3,15 +3,15 @@
     %h1= @game.title
   .events
     .title.row
-      %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 主催者
-      %p.col-12.col-sm-12.col-md-8.order-3.order-md-2 タイトル
+      %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 ゲーム
+      %p.col-12.col-sm-12.col-md-8.order-3.order-md-2 大会名
       %p.col-6.col-sm-6.col-md-2.order-2.order-md-3 開催日
     %ul.body
       - @event_details.each do |event_detail|
         %li.event
           = link_to event_detail, class: 'row' do
             %p.owner.col-6.col-sm-6.col-md-2.order-1.order-md-1
-              = event_detail.owner
+              = event_detail.game.title
             %p.col-12.col-sm-12.col-md-8.order-3.order-md-2
               = event_detail.title
             %p.col-6.col-sm-6.col-md-2.order-2.order-md-3
