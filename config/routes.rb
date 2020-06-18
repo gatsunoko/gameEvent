@@ -6,7 +6,12 @@ Rails.application.routes.draw do
       get :tag_search
     end
   end
-  resources :games
+  resources :games do
+    member do
+      get :up
+      get :down
+    end
+  end
   devise_for :users
   resources :events
   root 'home#index'

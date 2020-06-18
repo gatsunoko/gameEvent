@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_06_16_114931) do
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.boolean "edit_others"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_114931) do
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
+    t.integer "order_num", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

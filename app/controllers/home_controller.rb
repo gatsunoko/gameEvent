@@ -5,5 +5,6 @@ class HomeController < ApplicationController
                                 .order(date: :asc)
                                 .limit(5)
                                 .offset(0)
+    @games = Game.all.order(order_num: :asc)
   end
 end

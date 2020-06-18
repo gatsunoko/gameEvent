@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!
   before_action :im_admin
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :up, :down]
 
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.all.order(order_num: :asc)
   end
 
   # GET /games/1
@@ -27,6 +27,12 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    max = Game.maximum(:order_num)
+    if max.present?
+      @game.order_num = max + 1
+    else
+      @game.order_num = 1
+    end
 
     respond_to do |format|
       if @game.save
@@ -61,6 +67,32 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def up
+    min = Game.minimum(:order_num)
+    if @game.order_num != min
+      up_game = Game.find_by(order_num: @game.order_num - 1)
+      up_game.order_num = @game.order_num
+      @game.order_num = @game.order_num - 1
+
+      up_game.save
+      @game.save
+    end
+    redirect_to games_path
+  end
+
+  def down
+    max = Game.maximum(:order_num)
+    if @game.order_num != max
+      low_game = Game.find_by(order_num: @game.order_num + 1)
+      low_game.order_num = @game.order_num
+      @game.order_num = @game.order_num + 1
+
+      low_game.save
+      @game.save
+    end
+    redirect_to games_path
   end
 
   private

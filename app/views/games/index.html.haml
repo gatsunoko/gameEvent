@@ -7,11 +7,15 @@
       %th
       %th
       %th
+      %th
+      %th
 
   %tbody
     - @games.each do |game|
       %tr
         %td= game.title
+        %td= link_to '↑', up_game_path(game), class: 'btn btn-primary'
+        %td= link_to '↓', down_game_path(game), class: 'btn btn-primary'
         %td= link_to 'Show', game
         %td= link_to 'Edit', edit_game_path(game)
         %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
