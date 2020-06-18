@@ -19,4 +19,19 @@ class EventDetail < ApplicationRecord
   def date_not_before_today
     errors.add(:date, "は今日以降のものを選択してください") if date.nil? || date < Date.today
   end
+
+  validate :validate_image
+
+  def validate_image
+    return unless image.attached?
+    if image.blob.byte_size > 5.megabytes
+      errors.add(:image, I18n.t('ファイルサイズが5Mまでです'))
+    elsif !image?
+      errors.add(:image, I18n.t('投稿できるファイルは画像のみです'))
+    end
+  end
+
+  def image?
+    %w[image/jpg image/jpeg image/gif image/png].include?(image.blob.content_type)
+  end
 end

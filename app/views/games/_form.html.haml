@@ -9,6 +9,11 @@
     = f.label :title
     = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
-    = f.file_field :image, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+    = f.file_field :image,
+                    class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8',
+                    id: 'previw',
+                    onchange: "previewFile('previw')",
+                    accept: 'image/*'
+    = image_tag '', name: "previw"
   .actions
     = f.submit 'Save', class: 'btn btn-primary'

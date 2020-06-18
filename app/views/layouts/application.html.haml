@@ -28,6 +28,8 @@
         %ul.navbar-nav
           -if user_signed_in?
             %li.nav-item
+              = link_to 'イベント登録', new_event_detail_path, class: 'nav-link'
+            %li.nav-item
               = link_to ' ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
           - else
             %li.nav-item

@@ -32,4 +32,3 @@
             .image.text-center
               - if game.image.present?
                 = image_tag game.image.variant(resize_to_limit: [150, 100])
-  = link_to '新規登録', new_event_detail_path, class: 'btn btn-primary'

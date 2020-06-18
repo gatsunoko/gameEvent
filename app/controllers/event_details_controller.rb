@@ -24,12 +24,7 @@ class EventDetailsController < ApplicationController
     @event_detail.user_id = current_user.id
     @event_detail.latest = true
 
-    if params.dig(:event, :edit_others) == 'true'
-      edit_others = true
-    else
-      edit_others = false
-    end
-    event = Event.create(edit_others: edit_others, user_id: current_user.id)
+    event = Event.create(user_id: current_user.id)
     @event_detail.event_id = event.id
 
     respond_to do |format|
@@ -130,8 +125,7 @@ class EventDetailsController < ApplicationController
     end
 
     def can_edit
-      if !@event_detail.event.edit_others &&
-          @event_detail.event.user_id != current_user.id
+      if @event_detail.event.user_id != current_user.id
         redirect_to root_path and return
       end
     end

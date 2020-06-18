@@ -19,3 +19,12 @@ html, body {
   margin: 0;
   background-color: #f4f4f4;
 }
+textarea.form-control {
+  height: 120px;
+}
+
+.field {
+  img {
+    max-width: 100%;
+  }
+}
