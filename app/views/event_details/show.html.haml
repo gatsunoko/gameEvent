@@ -19,3 +19,5 @@
     = text_url_to_link(h(simple_format(@event_detail.text))).html_safe
   - if user_signed_in?
     = link_to 'Edit', edit_event_detail_path(@event_detail)
+/twitter埋め込み表示するスクリプト
+%script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}
