@@ -1,9 +1,6 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-:root {
-  --color_1: #e5ccb6;
-}
 .home {
   header {
     box-sizing: border-box;
@@ -11,13 +8,13 @@
     .events {
       .title {
         padding: 5px;
-        border-bottom: 2px solid gray;
-        background-color: black;
+        border-bottom: 2px solid var(--gray);
+        background-color: var(--black);
         p {
           font-size: 14px;
           font-weight: bold;
           margin: 0px;
-          color: white;
+          color: var(--white);
         }
       }
       .body {
@@ -31,11 +28,11 @@
           p {
             font-size: 14px;
             margin: 0px;
-            color: gray;
+            color: var(--gray);
           }
           p.game {
             font-weight: bold;
-            color: black;
+            color: var(--black);
           }
           @media screen and (max-width: 728px) {
             p {
@@ -44,7 +41,10 @@
           }
         }
         .event:nth-child(odd) {
-          background-color: #e9ecef;
+          background-color: var(--white);
+        }
+        .event:nth-child(even) {
+          background-color: var(--hai);
         }
       }
     }
@@ -63,16 +63,27 @@
     }
     .event_wrapper {
       padding: 5px;
-      height: 185px;
+      height: auto;
       .event_body {
-        background-color: #e5ccb6;
+        overflow: hidden;
+        box-sizing: border-box;
         height: 100%;
+        border: 1.5px solid var(--gray);
         .title {
           text-align: center;
           font-size: 26px;
           font-weight: bold;
-          color: black;
+          color: var(--black);
           padding: 5px;
+          margin: 0;
+        }
+        .image {
+          background-size: cover;
+          img {
+            width: 100%;
+            height: auto;
+            max-height: 180px;
+          }
         }
       }
     }

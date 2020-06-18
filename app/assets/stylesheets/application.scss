@@ -13,14 +13,36 @@
  *= require_tree .
  *= require_self
  */
+:root {
+  --blue: #7848F4;/*青*/
+  --red: #FF5C81;/*赤*/
+  --black: #131315;/*黒*/
+  --gray: #6A7C94;/*ぐれい*/
+  --mizu: #27A5EE;/*水色*/
+  --hai: #F8F8FA;/*ちょっと灰色*/
+  --white: #FFFFFF;/*しろ*/
+}
+
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: #f4f4f4;
+  background-color: var(--hai);
 }
 textarea.form-control {
   height: 120px;
+}
+h1 {
+  font-size: 2.5rem;
+  border-left: 3px solid var(--blue);
+  padding-left: 10px;
+  background-color: var(--white);
+}
+
+@media screen and (max-width: 576px) {
+  h1 {
+    font-size: 1.8rem;
+  }
 }
 
 .field {

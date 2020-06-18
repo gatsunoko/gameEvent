@@ -29,6 +29,8 @@
           .event_body
             %h2.title
               = game.title
-            .image.text-center
+            .image
               - if game.image.present?
-                = image_tag game.image.variant(resize_to_limit: [150, 100])
+                = image_tag game.image.variant(resize_to_fit: [250, 180])
+              - else
+                = image_tag 'https://placehold.it/250x180/?text=NoImage'

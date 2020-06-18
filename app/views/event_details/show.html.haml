@@ -1,15 +1,15 @@
 .event_details_show
-  %h1
+  %h3
     = link_to @event_detail.game.title, game_event_details_path(id: @event_detail.game.id)
-  %h2
+  %h1
     = @event_detail.title
   .image.text-left.w-100
     - if @event_detail.image.present?
       = image_tag @event_detail.image.variant(resize_to_limit: [1280, 720])
-  %p
+  %p.owner
     %b 主催者:
     = @event_detail.owner
-  %p
+  %p.date
     %b 開催日
     = @event_detail.date.strftime('%Y/%m/%d/ %H:%M')
   .tags
