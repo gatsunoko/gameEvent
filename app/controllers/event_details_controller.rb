@@ -5,11 +5,17 @@ class EventDetailsController < ApplicationController
 
   def index
     @event_details = EventDetail.where(latest: true)
-                                .where('date > ?', Date.today - 1)
-                                .order(date: :asc)
+                    .where('date > ?', Date.today - 1)
+                    .order(date: :asc)
+                    .page(params[:page])
+                    .per(25)
   end
 
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render :show }
+    end
   end
 
   def new
@@ -82,14 +88,16 @@ class EventDetailsController < ApplicationController
   def game
     @game = Game.find params[:id]
     @event_details = EventDetail.where(latest: true)
-                                .where(game_id: params[:id])
-                                .where('date > ?', Date.today - 1)
-                                .order(date: :asc)
+                    .where(game_id: params[:id])
+                    .where('date > ?', Date.today - 1)
+                    .order(date: :asc)
+                    .page(params[:page])
+                    .per(25)
   end
 
   def tag_search
     #パラメーターが空だったらトップへ
-    redirect_to root_path and return if params[:keyword].blank?
+    # redirect_to root_path and return if params[:keyword].blank?
     #検索
     sp = params[:keyword].gsub("　"," ")#全角スペースを半角スペースに変換
     sp.chop! if sp[sp.length-1] == " "#最後の文字がスペースだったら削除
@@ -113,6 +121,8 @@ class EventDetailsController < ApplicationController
                     .where(id: eventTags)
                     .order(date: :asc)
                     .distinct
+                    .page(params[:page])
+                    .per(25)
     #検索結果に表示にするタグ一覧ほインスタンス変数に保存
     @searchTags = params[:keyword].gsub("　"," ")
 

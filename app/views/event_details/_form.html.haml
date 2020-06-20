@@ -36,7 +36,7 @@
       .field.row.my-1.w-100.mx-0
         = tag.text_field :title, class: 'form-control col-xs-10 col-sm-10 col-md-10 col-lg-8'
         = tag.remove_nested_fields_button '削除', class: 'btn btn-danger co-xs-3 col-sm-2'
-    = f.add_nested_fields_button :tags, '追加', class: 'btn btn-primary'
+    = f.add_nested_fields_button :tags, '追加', class: 'btn btn-outline-primary'
   .field
     = f.label :text
     = f.text_area :text, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'

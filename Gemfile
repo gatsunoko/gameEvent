@@ -32,12 +32,11 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.5'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
-gem 'impressionist', '~> 2.0'
 gem 'aws-sdk-s3', '~> 1.66'
 gem 'image_processing', '~> 1.11'
-gem 'whenever', '~> 1.0'
 gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
 gem 'nested_fields', git: 'https://github.com/kmdtmyk/nested_fields', branch: 'master'
+gem 'kaminari', '~> 1.1', '>= 1.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -9,6 +9,15 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.secret_key = ENV["DEVISE_SECRET_KEY"]
+
+  config.omniauth :google_oauth2,
+                  ENV['GOOGLE_APP_ID'],
+                  ENV['GOOGLE_APP_SECRET'],
+                  name: :google,
+                  scope: %w(profile),
+                  redirect_uri: "#{ENV['SITE_URL']}/users/auth/google/callback",
+                  skip_jwt: true
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

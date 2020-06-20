@@ -1,3 +1,5 @@
+- content_for :title do
+  = @event_detail.title
 .event_details_show
   %h3
     = link_to @event_detail.game.title, game_event_details_path(id: @event_detail.game.id)
@@ -5,7 +7,7 @@
     = @event_detail.title
   .image.text-left.w-100
     - if @event_detail.image.present?
-      = image_tag @event_detail.image.variant(resize_to_limit: [1280, 720])
+      = image_tag @event_detail.image.variant(resize_to_limit: [1000, 1000])
   %p.owner
     %b 主催者:
     = @event_detail.owner

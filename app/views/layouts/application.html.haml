@@ -3,9 +3,21 @@
   %head
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title GameEvents
+    %meta{name: "description", content: "ゲームのイベントまとめサイト" }
+    %meta{name: "keywords", content: "ゲーム,イベント,PUBG,Apex,_Valolant,宣伝,イベント宣伝,参加募集"}
+    - title = content_for?(:title) ? yield(:title) : 'GameTrigger'
+    %title
+      = title
     /reset
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css", :rel => "stylesheet", :type => "text/css"}/
+    /favicon
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon", :sizes => "180x180"}/
+    %link{:href => "/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:href => "/site.webmanifest", :rel => "manifest"}/
+    %link{:color => "#5bbad5", :href => "/safari-pinned-tab.svg", :rel => "mask-icon"}/
+    %meta{:content => "#da532c", :name => "msapplication-TileColor"}/
+    %meta{:content => "#ffffff", :name => "theme-color"}/
     /bootstrap
     %script{:crossorigin => "anonymous", :integrity => "sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=", :src => "https://code.jquery.com/jquery-3.4.1.js"}
     %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", :integrity => "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", :rel => "stylesheet"}/
@@ -16,10 +28,25 @@
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = javascript_pack_tag 'application'
+    - if controller.controller_name == 'event_details' && controller.action_name == 'show'
+      %meta{:content => "#{@event_detail.title}", :property => "og:title"}/
+      %meta{:content => "article", :property => "og:type"}/
+      %meta{:content => "#{@event_detail.text}", :property => "og:description"}/
+      %meta{:content => "#{request.url}", :property => "og:url"}/
+      - if @event_detail.image.present?
+        %meta{:content => "#{rails_representation_url(@event_detail.image.variant(resize_to_limit: [300, 300], strip: true).processed, disposition: :inline)}", :property => "og:image"}/
+      - else
+        %meta{:content => "#{ENV['SITE_URL']}#{image_path('ogp_img.png')}", :property => "og:image"}/
+    - else
+      %meta{:content => "GameTrigger", :property => "og:title"}/
+      %meta{:content => "website", :property => "og:type"}/
+      %meta{:content => "ゲームのイベントまとめサイト", :property => "og:description"}/
+      %meta{:content => "#{request.url}", :property => "og:url"}/
+      %meta{:content => "#{ENV['SITE_URL']}#{image_path('ogp_img.png')}", :property => "og:image"}/
   %body
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light#navbar
+    %nav.navbar.navbar-expand-md.navbar-light.bg-light#navbar
       = link_to root_path, class: 'navbar-brand py-0' do
-        = image_tag 'https://placehold.it/150x40/?text=SiteLogo', class: 'logo'
+        = image_tag 'gametrigger.png', class: 'logo'
       .logo_offset
       %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
