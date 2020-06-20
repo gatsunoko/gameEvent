@@ -135,7 +135,9 @@ class EventDetailsController < ApplicationController
     end
 
     def can_edit
-      if @event_detail.event.user_id != current_user.id
+      if @event_detail.event.user_id != current_user.id &&
+      current_user.role != 'editor' &&
+      current_user.role != 'admin'
         redirect_to root_path and return
       end
     end

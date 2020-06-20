@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
-  before_action :im_admin
+  before_action :im_editor
   before_action :set_game, only: [:show, :edit, :update, :destroy, :up, :down]
 
   # GET /games
@@ -106,8 +106,9 @@ class GamesController < ApplicationController
       params.require(:game).permit(:title, :image)
     end
 
-    def im_admin
-      if !current_user.admin
+    def im_editor
+      if current_user.role != 'editor' &&
+      current_user.role != 'admin'
         redirect_to root_path and return
       end
     end

@@ -20,8 +20,9 @@
   .text
     = text_url_to_link(h(simple_format(@event_detail.text))).html_safe
   - if user_signed_in? && |
-    (@event_detail.user_id == current_user.id || |
-    current_user.admin) |
-    = link_to 'Edit', edit_event_detail_path(@event_detail)
+      (@event_detail.user_id == current_user.id || |
+      current_user.role == 'editor' || |
+      current_user.role == 'admin') |
+    = link_to '編集', edit_event_detail_path(@event_detail), class: 'btn btn-primary'
 /twitter埋め込み表示するスクリプト
 %script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}

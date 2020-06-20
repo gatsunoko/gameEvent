@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
+  enum role: { user: 0, editor: 1, admin: 2 }
+
   def self.find_for_google(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
     unless user
