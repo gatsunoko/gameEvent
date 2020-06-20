@@ -96,29 +96,29 @@ class EventDetailsController < ApplicationController
   end
 
   def tag_search
-    #パラメーターが空だったらトップへ
-    # redirect_to root_path and return if params[:keyword].blank?
     #検索
-    sp = params[:keyword].gsub("　"," ")#全角スペースを半角スペースに変換
-    sp.chop! if sp[sp.length-1] == " "#最後の文字がスペースだったら削除
-    sp = sp.gsub(" ","%,%")#半角スペースをカンマに変換(プレスホルダーの第二引数以降に使用する変数spに代入)
-    sp = '%'+sp+'%'
-    sp = sp.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
+    if params[:keyword].present?
+      sp = params[:keyword].gsub("　"," ")#全角スペースを半角スペースに変換
+      sp.chop! if sp[sp.length-1] == " "#最後の文字がスペースだったら削除
+      sp = sp.gsub(" ","%,%")#半角スペースをカンマに変換(プレスホルダーの第二引数以降に使用する変数spに代入)
+      sp = '%'+sp+'%'
+      sp = sp.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
 
-    eventTags = Array.new
+      eventTags = Array.new
 
-    sp.each.with_index do |keyword, i|
-      if i > 0
-        eventTags = eventTags & Tag.where('title like ?', keyword).pluck(:event_detail_id)
-      else
-        eventTags.push(*Tag.where('title like ?', keyword).pluck(:event_detail_id))
+      sp.each.with_index do |keyword, i|
+        if i > 0
+          eventTags = eventTags & Tag.where('title like ?', keyword).pluck(:event_detail_id)
+        else
+          eventTags.push(*Tag.where('title like ?', keyword).pluck(:event_detail_id))
+        end
       end
     end
 
     @game = Game.find params[:game_id] if params[:game_id].present?
     @event_details = EventDetail.where(latest: true)
                     .game_search(params[:game_id].to_s)#scope
-                    .where(id: eventTags)
+                    .tags_search(eventTags)#scope
                     .order(date: :asc)
                     .distinct
                     .page(params[:page])

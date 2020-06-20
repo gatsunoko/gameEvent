@@ -1,11 +1,13 @@
 = form_for @event_detail do |f|
   - if @event_detail.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@event_detail.errors.count, "error")} prohibited this event_detail from being saved:"
+      %h2
+        = @event_detail.errors.count
+        個のエラーがあります
       %ul
-        - @event_detail.errors.full_messages.each do |message|
-          %li= message
-
+      - @event_detail.errors.full_messages.each do |msg|
+        %li
+          = msg
   .field
     = f.label 'ゲーム'
     = f.collection_select :game_id, Game.all.order(title: :asc), :id, :title, {}, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
@@ -21,7 +23,7 @@
   - if controller.action_name == 'edit' || controller.action_name == 'update'
     .image.text-left.w-100
       - if @event_detail.image.present?
-        = image_tag @event_detail.image.variant(resize_to_limit: [1280, 720])
+        = image_tag @event_detail.image.variant(resize_to_limit: [1000, 1000])
   .field
     = f.file_field :image,
                     class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8',

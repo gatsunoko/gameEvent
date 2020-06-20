@@ -5,8 +5,10 @@ class EventDetail < ApplicationRecord
   has_many :tags, dependent: :destroy
   accepts_nested_attributes_for :tags, allow_destroy: true
   
-  validates :owner, presence: true
-  validates :title, presence: true
+  validates :owner, presence: true, length: { maximum: 50 }
+  validates :title, presence: true, length: { maximum: 100 }
+  #通常のvalidatesで文字制限すると改行を２文字にカウントする為に独自バリデーション
+  validate :text_length
   validates :date, presence: true
   validate  :date_not_before_today
 
@@ -14,6 +16,10 @@ class EventDetail < ApplicationRecord
 
   scope :game_search, ->(name) {
     where(game_id: name.to_i) if name.present?
+  }
+
+  scope :tags_search, ->(name) {
+    where(id: name) if name.present?
   }
   
   def date_not_before_today
@@ -33,5 +39,12 @@ class EventDetail < ApplicationRecord
 
   def image?
     %w[image/jpg image/jpeg image/gif image/png].include?(image.blob.content_type)
+  end
+
+  def text_length
+    content_for_validation = text.gsub(/\r\n/,"a")
+    if content_for_validation.length > 2000
+      errors.add(:text, "は2000文字以内で入力してください。")
+    end
   end
 end

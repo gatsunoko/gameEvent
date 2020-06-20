@@ -44,7 +44,14 @@ h1 {
     font-size: 1.8rem;
   }
 }
-
+#error_explanation {
+  h2 {
+    color: red;
+  }
+  li {
+    color: red;
+  }
+}
 #navbar {
   .logo {
     width: 150px;
@@ -56,7 +63,12 @@ h1 {
     max-width: 100%;
   }
 }
-
+.field_with_errors {
+  input,
+  textarea {
+    background-color: red;    
+  }
+}
 .google_signed_link {
   padding: 4px;
   margin: 0 auto;

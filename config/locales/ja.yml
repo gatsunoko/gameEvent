@@ -11,12 +11,15 @@ ja:
     models:
       user: 'ユーザー'
       event_detail: 'イベント'
+      tag: 'タグ'
     attributes:
       event_detail:
         owner: '主催者'
         title: 'イベント名'
         date: '開催日'
         text: '詳細'
+      tag:
+        title: 'タイトル'
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
