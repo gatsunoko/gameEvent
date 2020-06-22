@@ -29,6 +29,9 @@ html, body {
   margin: 0;
   background-color: var(--hai);
 }
+body {
+  margin-bottom: 100px;
+}
 textarea.form-control {
   height: 120px;
 }

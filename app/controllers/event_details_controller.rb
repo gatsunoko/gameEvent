@@ -113,20 +113,32 @@ class EventDetailsController < ApplicationController
           eventTags.push(*Tag.where('title like ?', keyword).pluck(:event_detail_id))
         end
       end
+
+      @game = Game.find params[:game_id] if params[:game_id].present?
+      if eventTags.present?
+        @event_details = EventDetail.where(latest: true)
+                        .game_search(params[:game_id].to_s)#scope
+                        .tags_search(eventTags)#scope
+                        .order(date: :asc)
+                        .distinct
+                        .page(params[:page])
+                        .per(25)
+        #検索結果に表示にするタグ一覧ほインスタンス変数に保存
+        @searchTags = params[:keyword].gsub("　"," ")
+      else
+        @event_details = EventDetail.none
+                        .page(params[:page])
+                        .per(25)
+      end
+    else
+      if params[:game_id].present?
+        redirect_to game_event_details_path(id: params[:game_id]) and return
+      else
+        redirect_back(fallback_location: root_path) and return
+      end
     end
 
-    @game = Game.find params[:game_id] if params[:game_id].present?
-    @event_details = EventDetail.where(latest: true)
-                    .game_search(params[:game_id].to_s)#scope
-                    .tags_search(eventTags)#scope
-                    .order(date: :asc)
-                    .distinct
-                    .page(params[:page])
-                    .per(25)
-    #検索結果に表示にするタグ一覧ほインスタンス変数に保存
-    @searchTags = params[:keyword].gsub("　"," ")
-
-    render 'game'
+    render 'game' and return
   end
 
   private
