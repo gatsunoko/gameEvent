@@ -24,5 +24,6 @@
       current_user.role == 'editor' || |
       current_user.role == 'admin') |
     = link_to '編集', edit_event_detail_path(@event_detail), class: 'btn btn-primary'
+    = link_to '削除', event_detail_path(@event_detail), data: { confirm: "削除してもよろしいですか?" }, method: :delete, class: 'btn btn-danger'
 /twitter埋め込み表示するスクリプト
 %script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}

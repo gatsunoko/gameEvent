@@ -1,7 +1,7 @@
 class EventDetailsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_event_detail, only: [:show, :edit, :update, :destroy]
-  before_action :can_edit, only: [:edit, :update]
+  before_action :can_edit, only: [:edit, :update, :destroy]
 
   def index
     @event_details = EventDetail.where(latest: true)
@@ -80,7 +80,7 @@ class EventDetailsController < ApplicationController
   def destroy
     @event_detail.destroy
     respond_to do |format|
-      format.html { redirect_to event_details_url, notice: 'Event detail was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Event detail was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
