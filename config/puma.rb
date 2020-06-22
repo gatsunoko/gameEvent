@@ -36,3 +36,4 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+bind "unix:///home/ec2-user/gameTrigger/tmp/sockets/puma.sock" # socketの設定
