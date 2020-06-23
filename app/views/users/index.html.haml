@@ -1,0 +1,19 @@
+.event_details_index
+  .events
+    .title.row
+      %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 名前
+      %p.col-12.col-sm-12.col-md-8.order-3.order-md-2 役職
+      %p.col-6.col-sm-6.col-md-2.order-2.order-md-3 id
+    %ul.body
+      - @users.each do |user|
+        %li.event
+          = link_to role_edit_user_path(user), class: 'row' do
+            %p.owner.col-6.col-sm-6.col-md-2.order-1.order-md-1
+              = user.name
+            %p.col-12.col-sm-12.col-md-8.order-3.order-md-2
+              = user.role
+            %p.col-6.col-sm-6.col-md-2.order-2.order-md-3
+              = user.id
+  .c_page_feed_select
+    %ul.p_flex
+      = paginate @users

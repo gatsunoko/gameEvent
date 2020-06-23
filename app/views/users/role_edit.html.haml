@@ -1,0 +1,21 @@
+= form_with url: role_update_user_path(@user), model: @user, local: true, method: :patch do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2
+        = @user.errors.count
+        個のエラーがあります
+      %ul
+      - @user.errors.full_messages.each do |msg|
+        %li
+          = msg
+  .field
+    %p
+      = @user.role
+    = f.label '役職'
+    = f.select 'user[role]', [['一般ユーザー', :user],
+                            ['投稿者', :contributor],
+                            ['編集者', :editor],
+                            ['管理者', :admin]],
+                          {}, class: 'form-control col-sm-5 col-md-3'
+  .actions
+    = f.submit '保存', class: 'btn btn-primary'

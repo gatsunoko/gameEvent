@@ -1,8 +1,11 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
-
-  enum role: { user: 0, editor: 1, admin: 2 }
+  # user          投稿はできる自分の投稿以外は編集できない
+  # contributor   他人の投稿も編集できる
+  # editor        ゲームを投稿できる
+  # admin         ユーザー権限を設定できる
+  enum role: { user: 0, contributor: 1, editor: 4, admin: 5 }
 
   def self.find_for_google(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
