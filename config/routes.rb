@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'home/index'
-  resources :event_details do
+  resources :event_details, path: 'e' do
     collection do
       get :game
       get :tag_search
