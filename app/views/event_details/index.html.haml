@@ -1,6 +1,8 @@
 .event_details_index
   -if @game.present?
     %h1= @game.title
+  -elsif @user.present?
+    %h1= @user.name
   .events
     .title.row
       %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 ゲーム

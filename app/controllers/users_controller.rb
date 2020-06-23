@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   end
 
   def show
+    @event_details = EventDetail.where(user_id: @user.id)
+                                .page(params[:page])
+                                .per(25)
+                                
+    render 'event_details/index'
   end
 
   def role_edit
