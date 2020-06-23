@@ -9,10 +9,8 @@
         %li
           = msg
   .field
-    %p
-      = @user.role
     = f.label '役職'
-    = f.select 'user[role]', [['一般ユーザー', :user],
+    = f.select :role, [['一般ユーザー', :user],
                             ['投稿者', :contributor],
                             ['編集者', :editor],
                             ['管理者', :admin]],
