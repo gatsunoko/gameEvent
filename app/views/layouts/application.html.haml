@@ -43,6 +43,14 @@
       %meta{:content => "ゲームのイベントまとめサイト", :property => "og:description"}/
       %meta{:content => "#{request.url}", :property => "og:url"}/
       %meta{:content => "#{ENV['SITE_URL']}#{image_path('ogp_img.png')}", :property => "og:image"}/
+    - if /gametrigger.jp/ =~ request.url
+      /Google Analytics
+      %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-170486537-1"}
+      :javascript
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-170486537-1');
   %body
     %nav.navbar.navbar-expand-md.navbar-light.bg-light#navbar
       = link_to root_path, class: 'navbar-brand py-0' do
