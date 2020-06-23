@@ -97,6 +97,7 @@ class EventDetailsController < ApplicationController
 
   def tag_search
     #検索
+    cookies.permanent[:select] = params[:game_id].to_i
     if params[:keyword].present?
       sp = params[:keyword].gsub("　"," ")#全角スペースを半角スペースに変換
       sp.chop! if sp[sp.length-1] == " "#最後の文字がスペースだったら削除
