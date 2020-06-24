@@ -59,6 +59,17 @@ h1 {
     width: 150px;
     height: auto;
   }
+  img.my_thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+  }
+  .dropdown-menu {
+    a {
+      padding-left: 15px;
+      color: var(--gray);
+    }
+  }
 }
 .footer {
   width: 100%;

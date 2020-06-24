@@ -64,8 +64,19 @@
           -if user_signed_in?
             %li.nav-item
               = link_to 'イベント登録', new_event_detail_path, class: 'nav-link'
-            %li.nav-item
-              = link_to ' ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
+            %li.nav-item.dropdown
+              %a#navbarDropdown.nav-link.dropdown-toggle.py-0{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                -if current_user.image.present?
+                  = image_tag current_user.image, class: 'my_thumbnail'
+                  = current_user.name
+              .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                %a.dropdown-item{:href => "#"}
+                  = link_to 'マイページ', user_path(current_user.id)
+                %a.dropdown-item{:href => "#"}
+                  = link_to 'プロフィール変更', edit_user_path(current_user.id)
+                .dropdown-divider
+                %a.dropdown-item{:href => "#"}
+                  = link_to ' ログアウト', destroy_user_session_path, method: :delete
           - else
             %li.nav-item
               = link_to 'ログイン', new_user_session_path, class: 'nav-link'
