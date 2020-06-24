@@ -93,6 +93,9 @@ class EventDetailsController < ApplicationController
                     .order(date: :asc)
                     .page(params[:page])
                     .per(25)
+                    
+    #検索のselectに使う
+    @gameList = Game.all.order(title: :asc)
   end
 
   def tag_search
@@ -138,6 +141,9 @@ class EventDetailsController < ApplicationController
         redirect_back(fallback_location: root_path) and return
       end
     end
+
+    #検索のselectに使う
+    @gameList = Game.all.order(title: :asc)
 
     render 'game' and return
   end
