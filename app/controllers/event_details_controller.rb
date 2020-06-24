@@ -26,6 +26,7 @@ class EventDetailsController < ApplicationController
   end
 
   def create
+    # raise.prams.inspect
     @event_detail = EventDetail.new(event_detail_params)
     @event_detail.user_id = current_user.id
     @event_detail.latest = true
@@ -35,6 +36,14 @@ class EventDetailsController < ApplicationController
 
     respond_to do |format|
       if @event_detail.save
+        #デフォルトタグを登録
+        params[:default_tags].each do |dt|
+          Tag.create(title: dt[1].to_s, event_detail_id: @event_detail.id)
+        end
+
+        #クッキーに登録ゲームID履歴を残す
+        cookies.permanent[:last_select_game] = @event_detail.game.id
+
         format.html { redirect_to @event_detail, notice: 'Event detail was successfully created.' }
         format.json { render :show, status: :created, location: @event_detail }
       else
@@ -87,6 +96,10 @@ class EventDetailsController < ApplicationController
 
   def game
     @game = Game.find params[:id]
+
+    #クッキーに履歴を残す
+    cookies.permanent[:last_select_game] = @game.id
+
     @event_details = EventDetail.where(latest: true)
                     .where(game_id: params[:id])
                     .where('date > ?', Date.today - 1)

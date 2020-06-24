@@ -10,7 +10,11 @@
           = msg
   .field
     = f.label 'ゲーム'
-    = f.collection_select :game_id, Game.all.order(title: :asc), :id, :title, {}, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+    = f.collection_select :game_id,
+                          Game.all.order(title: :asc),
+                          :id, :title,
+                          {selected: cookies[:last_select_game]},
+                          class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
     = f.label :owner
     = f.text_field :owner, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
@@ -32,6 +36,17 @@
                     onchange: "previewFile('previw')",
                     accept: 'image/*'
     = image_tag '', name: "previw"
+  - if controller.action_name == 'new' || controller.action_name == 'create'
+    .default_tags
+      .tag
+        = check_box_tag 'default_tags[participation]', '参加募集', checked: true
+        = label_tag 'default_tags[participation]', '参加募集'
+      .tag
+        = check_box_tag 'default_tags[broadcast]', 'オンライン', checked: true
+        = label_tag 'default_tags[broadcast]', 'オンライン'
+      .tag
+        = check_box_tag 'default_tags[solo]', '賞金あり'
+        = label_tag 'default_tags[solo]', '賞金あり'
   #tags.my-2
     %p
       タグ
