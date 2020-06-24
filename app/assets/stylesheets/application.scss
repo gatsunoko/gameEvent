@@ -30,7 +30,6 @@ html, body {
   background-color: var(--hai);
 }
 body {
-  margin-bottom: 100px;
 }
 textarea.form-control {
   height: 120px;
@@ -61,6 +60,11 @@ h1 {
     height: auto;
   }
 }
+.footer {
+  width: 100%;
+  height: 150px;
+  background-color: var(--hai);
+}
 .field {
   img {
     max-width: 100%;
@@ -69,7 +73,7 @@ h1 {
 .field_with_errors {
   input,
   textarea {
-    background-color: red;    
+    background-color: red;
   }
 }
 .google_signed_link {
