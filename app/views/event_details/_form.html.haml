@@ -28,6 +28,11 @@
     .image.text-left.w-100
       - if @event_detail.image.present?
         = image_tag @event_detail.image.variant(resize_to_limit: [1000, 1000])
+  - elsif controller.action_name == 'duplication'
+    .image.text-left.w-100
+      - if @original_record.image.present?
+        = image_tag @original_record.image.variant(resize_to_limit: [1000, 1000])
+    = hidden_field_tag :original_id, @original_record.id.to_i
   .field
     = f.label '画像 (必要であれば)'
     = f.file_field :image,

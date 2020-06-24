@@ -1,7 +1,7 @@
 class EventDetailsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_event_detail, only: [:show, :edit, :update, :destroy]
-  before_action :can_edit, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :duplication, :destroy]
+  before_action :set_event_detail, only: [:show, :edit, :update, :duplication, :destroy]
+  before_action :can_edit, only: [:edit, :update, :duplication, :destroy]
 
   def index
     @event_details = EventDetail.where(latest: true)
@@ -28,6 +28,17 @@ class EventDetailsController < ApplicationController
   def create
     # raise.prams.inspect
     @event_detail = EventDetail.new(event_detail_params)
+
+    if params[:event_detail][:image].blank? &&
+    params[:original_id].present?
+      original_record = EventDetail.find params[:original_id].to_i
+      @event_detail.image.attach({
+        io: StringIO.new(original_record.image.download),
+        filename: original_record.image.blob.filename,
+        content_type: original_record.image.blob.content_type
+      })
+    end
+
     @event_detail.user_id = current_user.id
     @event_detail.latest = true
 
@@ -37,8 +48,10 @@ class EventDetailsController < ApplicationController
     respond_to do |format|
       if @event_detail.save
         #デフォルトタグを登録
-        params[:default_tags].each do |dt|
-          Tag.create(title: dt[1].to_s, event_detail_id: @event_detail.id)
+        if params[:default_tags].present?
+          params[:default_tags].each do |dt|
+            Tag.create(title: dt[1].to_s, event_detail_id: @event_detail.id)
+          end
         end
 
         #クッキーに登録ゲームID履歴を残す
@@ -84,6 +97,13 @@ class EventDetailsController < ApplicationController
         format.json { render json: @event_detail.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def duplication
+    @original_record = EventDetail.find params[:id]
+    @event_detail = @original_record.dup
+
+    render 'new'
   end
 
   def destroy

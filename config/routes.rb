@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       get :game
       get :tag_search
     end
+    member do
+      get :duplication
+    end
   end
   resources :games do
     member do
