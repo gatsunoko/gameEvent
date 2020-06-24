@@ -93,7 +93,7 @@ class EventDetailsController < ApplicationController
                     .order(date: :asc)
                     .page(params[:page])
                     .per(25)
-                    
+
     #検索のselectに使う
     @gameList = Game.all.order(title: :asc)
   end
