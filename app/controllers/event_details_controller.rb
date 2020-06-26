@@ -31,12 +31,12 @@ class EventDetailsController < ApplicationController
 
     if params[:event_detail][:image].blank? &&
     params[:original_id].present?
-      original_record = EventDetail.find params[:original_id].to_i
-      if original_record.image.present?
+      @original_record = EventDetail.find params[:original_id].to_i
+      if @original_record.image.present?
         @event_detail.image.attach({
-          io: StringIO.new(original_record.image.download),
-          filename: original_record.image.blob.filename,
-          content_type: original_record.image.blob.content_type
+          io: StringIO.new(@original_record.image.download),
+          filename: @original_record.image.blob.filename,
+          content_type: @original_record.image.blob.content_type
         })
       end
     end

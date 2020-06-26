@@ -41,7 +41,9 @@
                     onchange: "previewFile('previw')",
                     accept: 'image/*'
     = image_tag '', name: "previw"
-  - if controller.action_name == 'new' || controller.action_name == 'create'
+  = controller.action_name
+  - if (controller.action_name == 'new' || controller.action_name == 'create') && |
+  @original_record.blank? |
     .default_tags
       .tag
         = check_box_tag 'default_tags[participation]', '参加募集', checked: true
@@ -52,6 +54,12 @@
       .tag
         = check_box_tag 'default_tags[solo]', '賞金あり'
         = label_tag 'default_tags[solo]', '賞金あり'
+  - elsif @original_record.present?
+    .default_tags
+      - @original_record.tags.each_with_index do |tag, i|
+        .tag
+          = check_box_tag "default_tags[original_tag#{i}]", tag.title, checked: true
+          = label_tag "default_tags[original_tag#{i}]", tag.title, checked: true
   #tags.my-2
     %p
       タグ
