@@ -3,4 +3,4 @@
     %h1= @game.title
   -elsif @user.present?
     %h1= @user.name
-  = render 'events'
+  = render 'events', first_column: 'game'

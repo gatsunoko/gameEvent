@@ -1,6 +1,10 @@
 .events
   .title.row
-    %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 主催者
+    %p.col-6.col-sm-6.col-md-2.order-1.order-md-1
+      - if first_column == 'owner'
+        主催者
+      - else
+        ゲーム
     %p.col-12.col-sm-12.col-md-8.order-3.order-md-2 タイトル
     %p.col-6.col-sm-6.col-md-2.order-2.order-md-3 開催日
   %ul.body
@@ -8,7 +12,10 @@
       %li.event
         = link_to event_detail, class: 'row' do
           %p.owner.col-6.col-sm-6.col-md-2.order-1.order-md-1
-            = event_detail.owner
+            - if first_column == 'owner'
+              = event_detail.owner
+            - else
+              = event_detail.game.title
           %p.title.col-12.col-sm-12.col-md-8.order-3.order-md-2
             = event_detail.title
           %p.date.col-6.col-sm-6.col-md-2.order-2.order-md-3
