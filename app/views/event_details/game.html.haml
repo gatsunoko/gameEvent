@@ -6,21 +6,4 @@
         = f.collection_select :game_id, @gameList, :id, :title, {selected: @game.id}, class: 'form-control col-xs-12 col-sm-8 col-md-3 col-lg-3'
         = f.text_field :keyword, class: 'form-control col-xs-12 col-sm-8 col-md-6 col-lg-6'
         %button.btn.btn-success.my-2.my-sm-0{:type => "submit"} 検索
-  .events
-    .title.row
-      %p.col-6.col-sm-6.col-md-2.order-1.order-md-1 主催者
-      %p.col-12.col-sm-12.col-md-8.order-3.order-md-2 タイトル
-      %p.col-6.col-sm-6.col-md-2.order-2.order-md-3 開催日
-    %ul.body
-      - @event_details.each do |event_detail|
-        %li.event
-          = link_to event_detail, class: 'row' do
-            %p.owner.col-6.col-sm-6.col-md-2.order-1.order-md-1
-              = event_detail.owner
-            %p.col-12.col-sm-12.col-md-8.order-3.order-md-2
-              = event_detail.title
-            %p.col-6.col-sm-6.col-md-2.order-2.order-md-3
-              = event_detail.date.strftime('%m/%d/ %H:%M').to_s
-  .c_page_feed_select
-    %ul.p_flex
-      = paginate @event_details
+  = render 'events'

@@ -4,7 +4,7 @@
 
 .event_details_index {
   .events {
-    .title {
+    div.title {
       padding: 15px;
       border-bottom: 2px solid var(--gray);
       background-color: var(--black);
@@ -28,7 +28,7 @@
           margin: 0px;
           color: var(--gray);
         }
-        p.owner {
+        p.title {
           font-weight: bold;
           color: var(--black);
         }

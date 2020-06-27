@@ -55,6 +55,12 @@ h1 {
   }
 }
 #navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: .3s;
+  z-index: 9000;
   .logo {
     width: 150px;
     height: auto;
@@ -70,6 +76,9 @@ h1 {
       color: var(--gray);
     }
   }
+}
+#contents {
+  padding-top: 56px;
 }
 .footer {
   width: 100%;
