@@ -41,7 +41,6 @@
                     onchange: "previewFile('previw')",
                     accept: 'image/*'
     = image_tag '', name: "previw"
-  = controller.action_name
   - if (controller.action_name == 'new' || controller.action_name == 'create') && |
   @original_record.blank? |
     .default_tags

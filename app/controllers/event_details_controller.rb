@@ -131,6 +131,11 @@ class EventDetailsController < ApplicationController
 
     #検索のselectに使う
     @gameList = Game.all.order(title: :asc)
+
+    respond_to do |format|
+      format.html { render 'game' }
+      format.json { render 'game' }
+    end
   end
 
   def tag_search
