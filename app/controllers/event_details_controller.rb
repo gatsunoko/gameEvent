@@ -161,6 +161,7 @@ class EventDetailsController < ApplicationController
       @game = Game.find params[:game_id] if params[:game_id].present?
       if eventTags.present?
         @event_details = EventDetail.where(latest: true)
+                        .where('date > ?', Time.now.ago(3.hours))
                         .game_search(params[:game_id].to_s)#scope
                         .tags_search(eventTags)#scope
                         .order(date: :asc)
@@ -171,6 +172,7 @@ class EventDetailsController < ApplicationController
         @searchTags = params[:keyword].gsub("　"," ")
       else
         @event_details = EventDetail.none
+                        .where('date > ?', Time.now.ago(3.hours))
                         .page(params[:page])
                         .per(25)
       end
