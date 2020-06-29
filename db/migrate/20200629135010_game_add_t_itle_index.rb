@@ -1,0 +1,5 @@
+class GameAddTItleIndex < ActiveRecord::Migration[6.0]
+  def change
+    add_index :games, :title
+  end
+end
