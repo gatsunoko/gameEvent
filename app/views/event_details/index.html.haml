@@ -1,6 +1,6 @@
 .event_details_index
-  -if @game.present?
+  - if @game.present?
     %h1= @game.title
-  -elsif @user.present?
+  - if @user.present?
     %h1= @user.name
-  = render 'events', first_column: 'game'
+  = render 'event_details/events', first_column: 'game'

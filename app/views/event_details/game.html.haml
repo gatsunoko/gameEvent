@@ -1,5 +1,5 @@
 .event_details_index
-  -if @game.present?
+  - if @game.present?
     %h1= @game.title
     .search.col-12.mx-2.text-right
       = form_with(url: tag_search_event_details_path, local: true, method: :get, class: 'row my-2 w-100 text-right') do |f|
