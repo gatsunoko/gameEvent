@@ -5,7 +5,7 @@ class EventDetailsController < ApplicationController
 
   def index
     @event_details = EventDetail.where(latest: true)
-                    .where('date > ?', Date.today - 1)
+                    .where('date > ?', Time.now.ago(3.hours))
                     .order(date: :asc)
                     .page(params[:page])
                     .per(25)
@@ -124,7 +124,7 @@ class EventDetailsController < ApplicationController
 
     @event_details = EventDetail.where(latest: true)
                     .where(game_id: params[:id])
-                    .where('date > ?', Date.today - 1)
+                    .where('date > ?', Time.now.ago(3.hours))
                     .order(date: :asc)
                     .page(params[:page])
                     .per(25)

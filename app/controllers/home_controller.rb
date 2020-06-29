@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @event_details = EventDetail.where(latest: true)
-                                .where('date > ?', Date.today - 1)
+                                .where('date > ?', Time.now.ago(3.hours))
                                 .order(date: :asc)
                                 .limit(5)
                                 .offset(0)
