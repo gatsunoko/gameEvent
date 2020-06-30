@@ -23,7 +23,11 @@
     = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
     = f.label :date
-    = f.datetime_local_field :date, value: Time.now.strftime('%Y-%m-%dT%H:%M'), class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
+    - if @event_detail.date.present?
+      - date = @event_detail.date.strftime('%Y-%m-%dT%H:%M')
+    - else
+      - date = Time.now.strftime('%Y-%m-%dT%H:%M')
+    = f.datetime_local_field :date, value: date, class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
   - if controller.action_name == 'edit' || controller.action_name == 'update'
     .image.text-left.w-100
       - if @event_detail.image.present?
