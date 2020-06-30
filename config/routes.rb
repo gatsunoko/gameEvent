@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :event_details, path: 'e' do
     collection do
       get :game
-      get :tag_search
+      get :search
     end
     member do
       get :duplication

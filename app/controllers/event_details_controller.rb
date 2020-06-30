@@ -138,7 +138,7 @@ class EventDetailsController < ApplicationController
     end
   end
 
-  def tag_search
+  def search
     #検索
     cookies.permanent[:select] = params[:game_id].to_i
     if params[:keyword].present?
@@ -149,21 +149,30 @@ class EventDetailsController < ApplicationController
       sp = sp.split(",")#ひとつの文字列だったspをカンマで区切って配列にする
 
       eventTags = Array.new
+      eventTitles = Array.new
+      eventOwners = Array.new
 
       sp.each.with_index do |keyword, i|
         if i > 0
           eventTags = eventTags & Tag.where('title like ?', keyword).pluck(:event_detail_id)
+          eventTitles = EventDetail.where('title like ?', keyword).pluck(:id)
+          eventOwners = EventDetail.where('owner like ?', keyword).pluck(:id)
         else
           eventTags.push(*Tag.where('title like ?', keyword).pluck(:event_detail_id))
+          eventTitles.push(*EventDetail.where('title like ?', keyword).pluck(:id))
+          eventOwners.push(*EventDetail.where('owner like ?', keyword).pluck(:id))
         end
       end
 
+      p '¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥'
+      p eventTitles
+
       @game = Game.find params[:game_id] if params[:game_id].present?
-      if eventTags.present?
+      if eventTags.present? || eventTitles.present? || eventOwners.present?
         @event_details = EventDetail.where(latest: true)
                         .where('date > ?', Time.now.ago(3.hours))
                         .game_search(params[:game_id].to_s)#scope
-                        .tags_search(eventTags)#scope
+                        .tags_search(eventTags, eventTitles, eventOwners)#scope
                         .order(date: :asc)
                         .distinct
                         .page(params[:page])

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_135010) do
+ActiveRecord::Schema.define(version: 2020_06_30_052300) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -44,8 +44,12 @@ ActiveRecord::Schema.define(version: 2020_06_29_135010) do
     t.bigint "event_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["date"], name: "index_event_details_on_date"
     t.index ["event_id"], name: "index_event_details_on_event_id"
     t.index ["game_id"], name: "index_event_details_on_game_id"
+    t.index ["latest"], name: "index_event_details_on_latest"
+    t.index ["owner"], name: "index_event_details_on_owner"
+    t.index ["title"], name: "index_event_details_on_title"
     t.index ["user_id"], name: "index_event_details_on_user_id"
   end
 
@@ -89,13 +93,12 @@ ActiveRecord::Schema.define(version: 2020_06_29_135010) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin", default: false, null: false
     t.string "uid"
     t.string "provider"
     t.string "name"
     t.string "token"
     t.string "image"
-    t.integer "role"
+    t.integer "role", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

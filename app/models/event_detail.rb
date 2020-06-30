@@ -18,8 +18,10 @@ class EventDetail < ApplicationRecord
     where(game_id: name.to_i) if name.present?
   }
 
-  scope :tags_search, ->(name) {
-    where(id: name) if name.present?
+  scope :tags_search, ->(tags, titles, owners) {
+    if tags.present? || titles.present? || owners.present?
+      where(id: tags).or(where(id: titles)).or(where(id: owners))
+    end
   }
   
   def date_not_before_today
