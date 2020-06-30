@@ -140,8 +140,10 @@ class EventDetailsController < ApplicationController
 
   def search
     #検索
+    @search_params = ""
     cookies.permanent[:select] = params[:game_id].to_i
     if params[:keyword].present?
+      @search_params = params[:keyword].to_s
       sp = params[:keyword].gsub("　"," ")#全角スペースを半角スペースに変換
       sp.chop! if sp[sp.length-1] == " "#最後の文字がスペースだったら削除
       sp = sp.gsub(" ","%,%")#半角スペースをカンマに変換(プレスホルダーの第二引数以降に使用する変数spに代入)
@@ -163,9 +165,6 @@ class EventDetailsController < ApplicationController
           eventOwners.push(*EventDetail.where('owner like ?', keyword).pluck(:id))
         end
       end
-
-      p '¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥'
-      p eventTitles
 
       @game = Game.find params[:game_id] if params[:game_id].present?
       if eventTags.present? || eventTitles.present? || eventOwners.present?
