@@ -21,6 +21,7 @@
     = text_url_to_link(h(simple_format(sanitize(@event_detail.text, tags: %w(p br a blockquote))))).html_safe
   - if user_signed_in? && |
       (@event_detail.user_id == current_user.id || |
+      current_user.role == 'contributor' || |
       current_user.role == 'editor' || |
       current_user.role == 'admin') |
     = link_to '編集', edit_event_detail_path(@event_detail), class: 'btn btn-primary'

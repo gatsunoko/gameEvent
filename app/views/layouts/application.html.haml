@@ -4,7 +4,7 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{name: "description", content: "ゲームのイベントまとめサイト" }
-    %meta{name: "keywords", content: "ゲーム,大会,対戦会,イベント,PUBG,Apex,_Valolant,宣伝,イベント宣伝,参加募集"}
+    %meta{name: "keywords", content: "ゲーム,ゲームトリガー,大会,対戦会,イベント,PUBG,Apex,_Valolant,宣伝,イベント宣伝,参加募集"}
     - title = content_for?(:title) ? yield(:title) : 'GameTrigger'
     %title
       = title
@@ -35,6 +35,8 @@
       %meta{:content => "#{request.url}", :property => "og:url"}/
       - if @event_detail.image.present?
         %meta{:content => "#{rails_representation_url(@event_detail.image.variant(resize_to_limit: [300, 300], strip: true).processed, disposition: :inline)}", :property => "og:image"}/
+      - elsif @event_detail.game.image.present?
+        %meta{:content => "#{rails_representation_url(@event_detail.game.image.variant(resize_to_limit: [300, 300], strip: true).processed, disposition: :inline)}", :property => "og:image"}/
       - else
         %meta{:content => "#{ENV['SITE_URL']}#{image_path('ogp_img.png')}", :property => "og:image"}/
     - elsif controller.controller_name == 'event_details' && controller.action_name == 'game'
