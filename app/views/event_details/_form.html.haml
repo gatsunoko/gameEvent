@@ -9,11 +9,15 @@
         %li
           = msg
   .field
+    - if @event_detail.game_id.present?
+      - default_game_id = @event_detail.game_id
+    - else
+      - default_game_id = cookies[:last_select_game]
     = f.label 'ゲーム'
     = f.collection_select :game_id,
                           Game.all.order(title: :asc),
                           :id, :title,
-                          {selected: cookies[:last_select_game]},
+                          {selected: default_game_id.to_i},
                           class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
     = f.label :owner
