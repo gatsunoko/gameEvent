@@ -18,6 +18,13 @@ ja:
         title: 'イベント名'
         date: '開催日'
         text: '詳細'
+      information_provision:
+        owner: '主催者'
+        title: 'イベント名'
+        date: '開催日'
+        text: '詳細'
+        name: '提供者'
+        contact: '連絡先'
       tag:
         title: 'タイトル'
     errors:

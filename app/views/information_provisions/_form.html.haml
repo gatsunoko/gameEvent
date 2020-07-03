@@ -1,0 +1,38 @@
+= form_for @information_provision do |f|
+  - if @information_provision.errors.any?
+    #error_explanation
+      %h2
+        = @information_provision.errors.count
+        個のエラーがあります
+      %ul
+      - @information_provision.errors.full_messages.each do |msg|
+        %li
+          = msg
+  .field
+    = f.label 'ゲーム'
+    = f.collection_select :game_id,
+                          Game.all.order(title: :asc),
+                          :id, :title,
+                          {selected: cookies[:last_select_game]},
+                          class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label :owner
+    = f.text_field :owner, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label :title
+    = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label :date
+    - date = Time.now.strftime('%Y-%m-%dT%H:%M')
+    = f.datetime_local_field :date, value: date, class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
+  .field
+    = f.label :text
+    = f.text_area :text, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label '提供者名(任意)'
+    = f.text_field :name, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .field
+    = f.label '連絡先(任意)'
+    = f.text_field :contact, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
+  .actions.my-2
+    = f.submit '保存', class: 'btn btn-primary'

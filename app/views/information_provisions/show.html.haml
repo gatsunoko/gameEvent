@@ -1,0 +1,26 @@
+.event_details_show
+  %h3
+    = @information_provision.game.title
+  %h1
+    = @information_provision.title
+  %p.owner
+    %b 主催者:
+    = @information_provision.owner
+  %p.date
+    %b 開催日
+    = @information_provision.date.strftime('%Y/%m/%d/ %H:%M')
+  .text
+    = text_url_to_link(h(simple_format(sanitize(@information_provision.text, tags: %w(p br a blockquote))))).html_safe
+  %p.owner
+    %b 情報提供者:
+    = @information_provision.name
+  - if user_signed_in? && |
+      (current_user.role == 'contributor' || |
+      current_user.role == 'editor' || |
+      current_user.role == 'admin') |
+    %p.owner
+      %b 連絡先:
+      = @information_provision.contact
+    = link_to '削除', information_provision_path(@information_provision), data: { confirm: "削除してもよろしいですか?" }, method: :delete, class: 'btn btn-danger'
+/twitter埋め込み表示するスクリプト
+%script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}

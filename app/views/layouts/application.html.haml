@@ -72,9 +72,14 @@
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
         %ul.navbar-nav
-          -if user_signed_in?
+          - if user_signed_in?
             %li.nav-item
               = link_to 'イベント登録', new_event_detail_path, class: 'nav-link'
+            - if (current_user.role == 'contributor' || |
+                current_user.role == 'editor' || |
+                current_user.role == 'admin') |
+              %li.nav-item
+                = link_to '提供情報一覧', information_provisions_path, class: 'nav-link'
             %li.nav-item.dropdown
               %a#navbarDropdown.nav-link.dropdown-toggle.py-0{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 -if current_user.image.present?
@@ -90,6 +95,8 @@
                   = link_to ' ログアウト', destroy_user_session_path, method: :delete
           - else
             %li.nav-item
+              = link_to 'イベント情報提供', new_information_provision_path, class: 'nav-link'
+            %li.nav-item
               = link_to 'ログイン', new_user_session_path, class: 'nav-link'
     #contents.container
       = yield
@@ -101,4 +108,3 @@
             %p.twitter_text 公式ツイッター
         .footer_content
           %p Copyright © 2020 GameTrigger.
-

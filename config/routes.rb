@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  root 'home#index'
   get 'home/index'
+
   resources :event_details, path: 'e' do
     collection do
       get :game
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
       get :duplication
     end
   end
+
   resources :games do
     member do
       get :up
@@ -27,6 +30,6 @@ Rails.application.routes.draw do
   end
 
   resources :events
-  root 'home#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :information_provisions, :only => [:index, :show, :new, :create, :destroy]
 end
