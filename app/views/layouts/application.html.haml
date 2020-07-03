@@ -94,3 +94,11 @@
     #contents.container
       = yield
     .footer
+      .footer_contents
+        .footer_content
+          =link_to 'https://twitter.com/GameTrigger3', target: :_blank, class: 'official_twitter' do
+            %span.twitter_icon
+            %p.twitter_text 公式ツイッター
+        .footer_content
+          %p Copyright © 2020 GameTrigger.
+
