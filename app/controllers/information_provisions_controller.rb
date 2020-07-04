@@ -25,7 +25,7 @@ class InformationProvisionsController < ApplicationController
 
     respond_to do |format|
       if @information_provision.save
-        format.html { redirect_to @information_provision, notice: 'Information provision was successfully created.' }
+        format.html { redirect_to @information_provision, notice: '情報提供ありがとうございます！' }
         format.json { render :show, status: :created, location: @information_provision }
       else
         format.html { render :new }
