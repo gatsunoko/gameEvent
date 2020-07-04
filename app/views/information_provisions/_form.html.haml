@@ -9,20 +9,32 @@
         %li
           = msg
   .field
-    = f.label 'ゲーム'
+    = f.label :game_id do
+      ゲーム
+      %span.required
+        (必須)
     = f.collection_select :game_id,
                           Game.all.order(title: :asc),
                           :id, :title,
                           {selected: cookies[:last_select_game]},
                           class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
-    = f.label :owner
+    = f.label :owner do
+      主催者
+      %span.required
+        (必須)
     = f.text_field :owner, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
-    = f.label :title
+    = f.label :title do
+      イベント名
+      %span.required
+        (必須)
     = f.text_field :title, class: 'form-control col-xs-12 col-sm-10 col-md-10 col-lg-8'
   .field
-    = f.label :date
+    = f.label :date do
+      開始日時
+      %span.required
+        (必須)
     - date = Time.now.strftime('%Y-%m-%dT%H:%M')
     = f.datetime_local_field :date, value: date, class: 'form-control col-xs-12 col-sm-6 col-md-4 col-lg-3'
   .field
