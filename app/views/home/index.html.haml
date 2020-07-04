@@ -15,8 +15,10 @@
                 = event_detail.title
               %p.col-6.col-sm-6.col-md-2.order-2.order-md-3
                 = event_detail.date.strftime('%m/%d/ %H:%M').to_s
-    .more.text-center
-      = link_to 'もっと見る', event_details_path, class: 'btn btn-primary'
+        %li.more
+          = link_to 'もっとみる', event_details_path
+    .information_provisions
+      = link_to 'イベント情報提供', new_information_provision_path
   %section.games.row
     .search.col-12.mx-2.text-right
       = form_with(url: search_event_details_path, local: true, method: :get, class: 'row my-2 w-100 text-right') do |f|

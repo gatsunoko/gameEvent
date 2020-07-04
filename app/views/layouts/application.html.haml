@@ -95,8 +95,6 @@
                   = link_to ' ログアウト', destroy_user_session_path, method: :delete
           - else
             %li.nav-item
-              = link_to 'イベント情報提供', new_information_provision_path, class: 'nav-link'
-            %li.nav-item
               = link_to 'ログイン', new_user_session_path, class: 'nav-link'
     #contents.container
       = yield
