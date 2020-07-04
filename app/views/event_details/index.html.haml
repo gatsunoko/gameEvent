@@ -3,4 +3,7 @@
     %h1= @game.title
   - if @user.present?
     %h1= @user.name
+    .breadcrumbs
+      = link_to 'HOME', root_path
+      %p >マイページ
   = render 'event_details/events', first_column: 'game'

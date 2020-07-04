@@ -1,4 +1,7 @@
 .user_edit
+  .breadcrumbs
+    = link_to 'HOME', root_path
+    %p >プロフィール変更
   = form_with(model: @user, local: true) do |form|
     - if @user.errors.any?
       #error_explanation

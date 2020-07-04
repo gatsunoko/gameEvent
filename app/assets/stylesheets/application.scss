@@ -112,6 +112,19 @@ h1 {
     }
   }
 }
+.breadcrumbs {
+  a {
+    color: var(--mizu);
+    font-size: 14px;
+    display: inline-block;
+  }
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--black);
+    display: inline-block;
+  }
+}
 .field {
   img {
     max-width: 100%;

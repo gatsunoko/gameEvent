@@ -1,6 +1,11 @@
 .event_details_show
   %h3
     = @information_provision.game.title
+  .breadcrumbs
+    = link_to 'HOME', root_path
+    %p >イベント情報提供
+    %p >
+    = @information_provision.title
   %h1
     = @information_provision.title
   %p.owner

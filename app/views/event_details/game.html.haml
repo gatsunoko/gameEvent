@@ -4,6 +4,10 @@
     - search_params = ""
     - if @search_params.present?
       - search_params = @search_params
+    .breadcrumbs
+      = link_to 'HOME', root_path
+      %p >
+      = @game.title
     .search.col-12.mx-2.text-right
       = form_with(url: search_event_details_path, local: true, method: :get, class: 'row my-2 w-100 text-right') do |f|
         = f.collection_select :game_id, @gameList, :id, :title, {selected: @game.id}, class: 'form-control col-xs-12 col-sm-8 col-md-3 col-lg-3'

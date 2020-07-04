@@ -3,6 +3,12 @@
 .event_details_show
   %h3
     = link_to @event_detail.game.title, game_event_details_path(id: @event_detail.game.id)
+  .breadcrumbs
+    = link_to 'HOME', root_path
+    %p >
+    = link_to @event_detail.game.title, game_event_details_path(id: @event_detail.game.id)
+    %p >
+    %p= @event_detail.title
   %h1
     = @event_detail.title
   .image.text-left.w-100
