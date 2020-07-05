@@ -6,6 +6,7 @@ class User < ApplicationRecord
   # editor        ゲームを投稿できる
   # admin         ユーザー権限を設定できる
   enum role: { user: 0, contributor: 1, editor: 4, admin: 5 }
+  validates :name, presence: true, length: { maximum: 50 }
 
   def self.find_for_google(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first

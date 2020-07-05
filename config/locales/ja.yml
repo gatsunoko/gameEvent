@@ -13,6 +13,8 @@ ja:
       event_detail: 'イベント'
       tag: 'タグ'
     attributes:
+      user:
+        name: '名前'
       event_detail:
         owner: '主催者'
         title: 'イベント名'
