@@ -2,6 +2,8 @@
   - if @game.present?
     %h1= @game.title
   - if @user.present?
+    - content_for :title do
+      マイページ | GameTrigger
     %h1= @user.name
     .breadcrumbs
       = link_to 'HOME', root_path

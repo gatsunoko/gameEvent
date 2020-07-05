@@ -1,5 +1,5 @@
 - content_for :title do
-  = @event_detail.title
+  = @event_detail.title + ' | GameTrigger'
 .event_details_show
   %h3
     = link_to @event_detail.game.title, game_event_details_path(id: @event_detail.game.id)

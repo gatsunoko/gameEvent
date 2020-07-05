@@ -1,5 +1,7 @@
 .event_details_index
   - if @game.present?
+    - content_for :title do
+      = @game.title + 'の大会情報一覧 | GameTrigger'
     %h1= @game.title
     - search_params = ""
     - if @search_params.present?
