@@ -26,7 +26,7 @@
         = f.text_field :keyword, class: 'form-control col-xs-12 col-sm-8 col-md-6 col-lg-6'
         %button.btn.btn-success.my-2.my-sm-0{:type => "submit"} 検索
     - @games.each do |game|
-      .event_wrapper.col-12.col-sm-6.col-md-4
+      .event_wrapper.col-6.col-sm-6.col-md-4
         = link_to game_event_details_path(id: game.id) do
           .event_body
             %h2.title
