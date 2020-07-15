@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable, :timeoutable
   # user          投稿はできる自分の投稿以外は編集できない
   # contributor   他人の投稿も編集できる
   # editor        ゲームを投稿できる
