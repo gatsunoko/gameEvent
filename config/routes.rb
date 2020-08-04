@@ -32,4 +32,12 @@ Rails.application.routes.draw do
   resources :events
 
   resources :information_provisions, :only => [:index, :show, :new, :create, :destroy]
+
+  resources :pokes do
+    collection do
+      get :auto_complete
+      get :pokemon
+      get :poke_search
+    end
+  end
 end

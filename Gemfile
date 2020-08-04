@@ -37,6 +37,7 @@ gem 'image_processing', '~> 1.11'
 gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
 gem 'nested_fields', git: 'https://github.com/kmdtmyk/nested_fields', branch: 'master'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

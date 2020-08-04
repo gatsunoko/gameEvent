@@ -3,7 +3,7 @@
   %head
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{name: "description", content: "ゲームのイベントまとめサイト" }
+    %meta{name: "description", content: "ゲームのイベントをお知らせるするサイトを運営しています！eスポーツイベントから個人主催の小さなオンラインイベントまで！ゲームのイベント開催情報ありましたら是非おしえてください！" }
     %meta{name: "keywords", content: "ゲーム,ゲームトリガー,大会,対戦会,イベント,PUBG,Apex,_Valolant,宣伝,イベント宣伝,参加募集"}
     - title = content_for?(:title) ? yield(:title) : 'GameTrigger'
     %title
@@ -96,8 +96,12 @@
           - else
             %li.nav-item
               = link_to 'ログイン', new_user_session_path, class: 'nav-link'
-    #contents.container
-      = yield
+    - if controller.controller_name != 'pokes'
+      #contents.container
+        = yield
+    - else
+      #contents
+        = yield
     .footer
       .footer_contents
         .footer_content

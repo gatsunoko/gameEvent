@@ -1,0 +1,220 @@
+// Place all the styles related to the pokes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.ui-helper-hidden-accessible { display:none; }
+
+.poke_link {
+  width: 100%;
+  margin: 15px auto;
+  text-align: center;
+  a {
+    display: inline-block;
+    width: 200px;
+    background-color: var(--white);
+    border: 3px solid var(--mizu);
+    padding: 15px;
+    border-radius: 30px;
+    color: var(--mizu);
+  }
+  a:hover {
+    border: 3px solid var(--blue);
+  }
+}
+
+.poke_area {
+  display: flex;
+  justify-content: center;
+  p {
+    margin: 0 0 7px 0;
+    font-size: 16px
+  }
+  .area_1 {
+    text-align: right;
+    padding-right: 5px;
+    background-color: #c3c8f9;
+    .hp, .a, .b, .c, .d, .s {
+      display: flex;
+      justify-content: flex-end;
+      .status_count {
+        order: 1;
+      }
+      .upButton {
+        order: 2;
+      }
+      .downButton {
+        order: 3;
+      }
+      .status_category {
+        order: 4;
+      }
+      .status_value {
+        order: 5;
+      }
+    }
+  }
+  .area_2 {
+    padding-left: 5px;
+    background-color: #f9c3c3;
+    .hp, .a, .b, .c, .d, .s {
+      display: flex;
+      justify-content: flex-start;
+      .status_count {
+        order: 5;
+      }
+      .upButton {
+        order: 2;
+      }
+      .downButton {
+        order: 3;
+      }
+      .status_value {
+        order: 1;
+      }
+    }
+  }
+  .area_1,
+  .area_2 {
+    padding-bottom: 5px;
+    width: 50%;
+    max-width: 260px;
+    .search_text {
+      border-top-right-radius: 0;
+      border-bottom-right-radius:0
+    }
+    button {
+      border:none;
+      background-color: white;
+      margin-left: -2px;
+      position: relative;
+      z-index: 1;
+      border: 1px solid #ced4da;
+    }
+    .status_value {
+      display: inline-block;
+      width: 26.5px;
+    }
+    .name {
+      margin: 0;
+    }
+    .shuzokuti {
+      font-size: 10px;
+      margin: 0;
+    }
+    .upButton,
+    .downButton {
+      text-align: center;
+      display: inline-block;
+      padding: 1px;
+      margin: 0 1px;
+      width: 25px;
+      height: 25px;
+      background-color: white;
+      border-radius: 5px;
+      /*選択負荷*/
+     -ms-user-select: none;
+     -moz-user-select: none;
+     -khtml-user-select: none;
+     -webkit-user-select: none;
+     user-select: none;
+    }
+    .upButton {
+      color: red;
+    }
+    .downButton {
+      color: blue;
+    }
+  }
+  .normal,
+  .honoo,
+  .mizu,
+  .denki,
+  .kusa,
+  .koori,
+  .kakutou,
+  .doku,
+  .zimen,
+  .hikou,
+  .esupa,
+  .musi,
+  .iwa,
+  .gosuto,
+  .dragon,
+  .aku,
+  .hagane,
+  .feari {
+    display: inline-block;
+    border: 2px solid white;
+    border-radius: 15px;
+    font-size: 10px;
+    padding: 3px;
+    margin: 0 2px;
+    line-height: 14px;
+    font-weight: bold;
+    color: black;
+    height: auto;
+    min-width: 50px;
+    text-align: center;
+  }
+  .normal {
+    background-color: #b6b3aa;
+  }
+  .honoo{
+    background-color: #fe6045;
+  }
+  .mizu{
+    background-color: #459ff7;
+  }
+  .denki{
+    background-color: #ffce53;
+  }
+  .kusa{
+    background-color: #81b95e;
+  }
+  .koori{
+    background-color: #71d4f3;
+  }
+  .kakutou{
+    background-color: #c06249
+  }
+  .doku{
+    background-color: #af6894;
+  }
+  .zimen{
+    background-color: #e2bf65;
+  }
+  .hikou{
+    background-color: #6a9cf1;
+  }
+  .esupa{
+    background-color: #f973a6;
+  }
+  .musi{
+    background-color: #e2bf65;
+  }
+  .iwa{
+    background-color: #c7b06c;
+  }
+  .gosuto{
+    background-color: #7678c5;
+  }
+  .dragon{
+    background-color: #887cea;
+  }
+  .aku{
+    background-color: #936d5a;
+  }
+  .hagane{
+    background-color: #b9b8c0;
+  }
+  .feari{
+    background-color: #eeade7;
+  }
+}
+.attack_type {
+  display: flex;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  background-color: #cee5f7;
+  text-align: left;
+}

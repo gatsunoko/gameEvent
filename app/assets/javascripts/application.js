@@ -1,3 +1,4 @@
+//= require jquery-ui
 //= require nested_fields
 
 //ファイルフィールドに画像をアップしたらプレビューする
