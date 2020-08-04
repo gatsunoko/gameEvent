@@ -1,6 +1,6 @@
 class PokesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  before_action :im_editor
+  before_action :im_editor, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   before_action :set_poke, only: [:show, :edit, :update, :destroy]
 
   def index
