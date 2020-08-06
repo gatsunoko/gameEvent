@@ -17,6 +17,14 @@ class PokesController < ApplicationController
     @poke = Poke.where('name like ?', '%' + params[:keyword] + '%').first
   end
 
+  def pokecheck
+  end
+
+  def poke_check_search
+    @poke = Poke.where('name like ?', '%' + params[:keyword] + '%').first
+    @output = params[:output].to_s
+  end
+
   def new
     @poke = Poke.new
   end

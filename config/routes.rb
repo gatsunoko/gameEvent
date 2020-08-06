@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     collection do
       get :auto_complete
       get :pokemon
+      get :pokecheck
+      get :poke_check_search
       get :poke_search
     end
   end
