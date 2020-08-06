@@ -15,7 +15,6 @@ class PokesController < ApplicationController
 
   def poke_search
     @poke = Poke.where('name like ?', '%' + params[:keyword] + '%').first
-    @output = params[:output].to_s
   end
 
   def new
@@ -62,8 +61,6 @@ class PokesController < ApplicationController
   def auto_complete
     @pokes = Poke.select('name').where('name like ?', params[:term].to_s.tr('ぁ-ん','ァ-ン') + '%').order(number: :asc)
 
-    p params[:term].to_s
-    p @pokes.count
     render json: @pokes.to_json
   end
 
